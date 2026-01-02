@@ -37,8 +37,10 @@ public class cloudVendorServiceImpl implements CloudVendorService {
     }
 
     @Override
-    public CloudVendor getCloudVendor(String cloudVendorId) {
+   public CloudVendor getCloudVendor(String cloudVendorId) {
         // More business logic
+        if(cloudVendorRepository.findById(cloudVendorId).isEmpty())
+            throw new CloudVendorNotFoundException("Requested Cloud Vendor does not exists");
         return cloudVendorRepository.findById(cloudVendorId).get();
     }
 
@@ -48,3 +50,4 @@ public class cloudVendorServiceImpl implements CloudVendorService {
         return cloudVendorRepository.findAll();
     }
 }
+
